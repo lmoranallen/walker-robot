@@ -1,0 +1,25 @@
+{
+  "name": "walker-robot",
+  "version": "1.0.0",
+  "description": "TypeScript implementation of a robot traversing a grid.",
+  "main": "play.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmoranallen/walker-robot.git"
+  },
+  "keywords": [
+    "robot"
+  ],
+  "author": "Leechay Moran-Allen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmoranallen/walker-robot/issues"
+  },
+  "homepage": "https://github.com/lmoranallen/walker-robot#readme",
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
+}
