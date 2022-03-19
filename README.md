@@ -13,7 +13,8 @@ following approach makes the most sense:
 
 - Progressing onto the basic functionality of the robot (i.e: movement)
 
-- Combining all of this to successfully implement a "single turn" or "successful move"
+- Combining all of this to successfully implement a "single turn" or "successful move":
+	- A key part of this step involves handling the traversal of the grid
 
 - Handling event-specific cases and edge cases:
 	* Returning to the start space to refuel
@@ -29,5 +30,7 @@ following approach makes the most sense:
 ### Objective 
 
 - Stage 1:  Produce an MVP that allows the user to just play the game
-- Don't worry about styling at the moment, just get the game working in ASCII for now.
+- Don't worry about styling at the moment, just get the game working in ASCII for now on the browser
+
+- Stage 2: Expand to utilise Tailwind
 

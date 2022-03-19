@@ -2,9 +2,10 @@
   "name": "walker-robot",
   "version": "1.0.0",
   "description": "TypeScript implementation of a robot traversing a grid.",
-  "main": "play.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p tsconfig.json",
+    "test": "node src/grid-tools/gridTests.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,10 @@
   "homepage": "https://github.com/lmoranallen/walker-robot#readme",
   "devDependencies": {
     "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "common-js": "^0.3.8",
+    "express": "^4.17.3",
+    "path": "^0.12.7"
   }
 }
