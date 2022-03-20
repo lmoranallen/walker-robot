@@ -2,20 +2,81 @@ import { explodeRobot, handleMoveRobot } from "./robot-tools/robot.js";
 import { generateGrid, updateGrid } from "./grid-tools/grid.js"
 import {Robot} from "./robot-tools/robot";
 
+//NOTE: For different sized grids, change this at the start
+const GRID_HEIGHT = 8;
+const GRID_WIDTH = 8;
 
-const GRID_HEIGHT = prompt("Choose the height of the grid");
-const GRID_WIDTH = prompt("Choose the width of the grid");
+const MAX_CHARGE = 13;
+const NAME = 'Leechay'
 
 console.log(`The grid is of size ${GRID_HEIGHT}x${GRID_WIDTH}`);
 
-const userRobot:Robot = {position: 0,charge: 13, maxCharge: 13,name: 'Leechay', hasExploded: false}
-const grid = generateGrid({dimensions: {width: 5, height: 5}})
+const userRobot:Robot = {position: 0,charge: MAX_CHARGE, maxCharge: MAX_CHARGE,name: NAME, hasExploded: false}
+const grid = generateGrid({dimensions: {width: GRID_WIDTH, height: GRID_HEIGHT}})
 
+let canvas:any = document.getElementById('myCanvas');
+
+
+/*
+*
+* Canvas content purely for visual purposes
+*
+*/
+function randomColor() {
+    return ('#' + Math.floor(Math.random() * 16777215).toString(16));
+}
+
+
+//@ts-ignore
+var ctx = canvas.getContext("2d");
+// ctx.rotate(90 * Math.PI / 180);
+//@ts-ignore
+var cw = canvas.width;
+//@ts-ignore
+var ch = canvas.height;
+var padding = 5;  
+var w = (cw - padding * GRID_HEIGHT) / GRID_HEIGHT;
+var h = (ch - padding * GRID_WIDTH) / GRID_WIDTH;   
+var colors:any = []
+for (var y = 0; y < GRID_WIDTH; y++) {
+    for (var x = 0; x < GRID_HEIGHT; x++) {
+        colors.push(randomColor());
+    }
+}
+
+
+function drawGrid(){
+    ctx.clearRect(0,0,cw,ch);
+    ctx.save();
+    ctx.globalAlpha = 0.25;
+    for (var y = 0; y < GRID_WIDTH; y++) {
+        for (var x = 0; x < GRID_HEIGHT; x++) {
+            ctx.fillStyle = colors[y * GRID_HEIGHT + x];
+            ctx.fillRect(x * (w + padding), y * (h + padding), w, h);
+        }
+    }
+}
+
+function drawCircle(robotPos:number) {
+    ctx.globalAlpha = 0.8;
+    const xPos = Math.floor(robotPos / GRID_WIDTH);
+    const yPos = robotPos % GRID_HEIGHT;
+    ctx.beginPath();
+    ctx.arc((0.5+xPos) * (w + padding), (0.5+yPos) * (h + padding), 10, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+}
+
+//initialisation
+drawGrid(); 
+drawCircle(userRobot.position);
 window.addEventListener("keydown", (event:KeyboardEvent) => {
     //for now keep as 5x5, once working - expand to provide arguments for game
     if(userRobot.hasExploded) return;
-    handleMoveRobot(userRobot,event.key, {width: 5, height:5});
+    handleMoveRobot(userRobot,event.key, {width: GRID_WIDTH, height:GRID_HEIGHT});
     updateGrid(userRobot.position, grid);
+    drawGrid();
+    drawCircle(userRobot.position); //update new position
     console.log(`Robot charge ${userRobot.charge}`);
     explodeRobot(userRobot);
 }, true);
