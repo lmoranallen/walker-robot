@@ -10,11 +10,12 @@ console.log(`The grid is of size ${GRID_HEIGHT}x${GRID_WIDTH}`);
 
 const userRobot:Robot = {position: 0,charge: 13, maxCharge: 13,name: 'Leechay', hasExploded: false}
 const grid = generateGrid({dimensions: {width: 5, height: 5}})
-// const screen = document.getElementById('content');
+
 window.addEventListener("keydown", (event:KeyboardEvent) => {
     //for now keep as 5x5, once working - expand to provide arguments for game
     if(userRobot.hasExploded) return;
     handleMoveRobot(userRobot,event.key, {width: 5, height:5});
     updateGrid(userRobot.position, grid);
+    console.log(`Robot charge ${userRobot.charge}`);
     explodeRobot(userRobot);
 }, true);

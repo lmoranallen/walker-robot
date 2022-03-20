@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "TypeScript implementation of a robot traversing a grid.",
   "main": "app.js",
+  "type":"module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node src/assets/js/grid-tools/gridTests.js"

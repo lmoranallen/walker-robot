@@ -80,6 +80,7 @@ export function isValidMove(robot: Robot, move: Move, grid: {width: number, heig
 }
 
 function chargeRobot(robot: Robot) {
+    console.log('Robot recharged');
     robot.charge = robot.maxCharge;
 }
 

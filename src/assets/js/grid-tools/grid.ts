@@ -6,11 +6,6 @@
  * 
  **/
 
-type Space = {
-    idx: number,
-    hasRobot: boolean,
-}
-
 export type Grid = {
     dimensions: {width: number, height: number}    
 }
@@ -18,7 +13,9 @@ export type Grid = {
 
 // Given a set width and height, returns an array of spaces that represents the grid
 export function generateGrid(grid:Grid) {
-    return new Array(grid.dimensions.width*grid.dimensions.height).fill('O');
+    const robotGrid = new Array(grid.dimensions.width*grid.dimensions.height).fill('O');
+    robotGrid[0] = 'X'; //initialises robot's position
+    return robotGrid;
 }
 
 //updates the snapshot of the robot's position on the board
@@ -27,11 +24,6 @@ export function updateGrid(robotPosition: number, grid: any[]) {
     grid[lastPosition] = 'O';
     grid[robotPosition] = 'X';
     console.log(grid);
-}
-
-// confirms whether the robot is on the starting space - necessary for determining explosion
-export function isStartSpace(position: number) {
-    return (position === 0);
 }
 
 
