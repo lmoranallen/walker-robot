@@ -12,6 +12,10 @@ To change the settings:
 > Go to `src/play.ts`
 > The settings at the top can be tweaked
 
+## To Play
+- Use the Arrow keys to move the circle around the grid. 
+- Returning to the starting square recharges the Robot
+
 ## Process
 There are a select amount of core aspects that need to be
 considered when approaching this problem. I find that the
