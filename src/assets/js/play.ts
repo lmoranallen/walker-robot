@@ -2,24 +2,24 @@ import { explodeRobot, handleMoveRobot } from "./robot-tools/robot.js";
 import { generateGrid, updateGrid } from "./grid-tools/grid.js"
 import {Robot} from "./robot-tools/robot";
 
-//NOTE: For different sized grids, change this at the start
-const GRID_HEIGHT = 8;
-const GRID_WIDTH = 8;
+//NOTE: For different settings, feel free to experiment with the below:
+const GRID_HEIGHT = 6;
+const GRID_WIDTH = 6;
 
 const MAX_CHARGE = 13;
 const NAME = 'Leechay'
 
 console.log(`The grid is of size ${GRID_HEIGHT}x${GRID_WIDTH}`);
 
-const userRobot:Robot = {position: 0,charge: MAX_CHARGE, maxCharge: MAX_CHARGE,name: NAME, hasExploded: false}
+const userRobot:Robot = {position: 0,charge: MAX_CHARGE, maxCharge: MAX_CHARGE,name: NAME, hasExploded: false, score: 0}
 const grid = generateGrid({dimensions: {width: GRID_WIDTH, height: GRID_HEIGHT}})
 
-let canvas:any = document.getElementById('myCanvas');
+const canvas:any = document.getElementById('myCanvas');
 
 
 /*
 *
-* Canvas content purely for visual purposes
+* Canvas content purely for visual demonstration purposes
 *
 */
 function randomColor() {
@@ -70,6 +70,8 @@ function drawCircle(robotPos:number) {
 //initialisation
 drawGrid(); 
 drawCircle(userRobot.position);
+const scoreTag = document.getElementById('score');
+const chargeCount = document.getElementById('charge');
 window.addEventListener("keydown", (event:KeyboardEvent) => {
     //for now keep as 5x5, once working - expand to provide arguments for game
     if(userRobot.hasExploded) return;
@@ -77,6 +79,12 @@ window.addEventListener("keydown", (event:KeyboardEvent) => {
     updateGrid(userRobot.position, grid);
     drawGrid();
     drawCircle(userRobot.position); //update new position
+    if(scoreTag) {
+        scoreTag.innerHTML = "Score: " + userRobot.score.toString();
+    }
+    if(chargeCount) {
+        chargeCount.innerHTML = "Charge: " + userRobot.charge.toString();
+    }
     console.log(`Robot charge ${userRobot.charge}`);
     explodeRobot(userRobot);
 }, true);

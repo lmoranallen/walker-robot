@@ -4,6 +4,7 @@ export type Robot = {
     maxCharge: number
     name?: string,
     hasExploded: boolean,
+    score: number, //number of steps taken before exploding
 }
 
 export type Move = 'Up' | 'Down' | 'Left' | 'Right';
@@ -29,6 +30,7 @@ export function handleMoveRobot(robot: Robot, eventKey: string, grid: {width: nu
                 console.log('Moved down');
                 console.log(`Robot position: ${robot.position}`);
                 robot.charge--;
+                robot.score++;
             }
             break;
         case "ArrowUp":
@@ -38,6 +40,7 @@ export function handleMoveRobot(robot: Robot, eventKey: string, grid: {width: nu
                 console.log('Moved up');
                 console.log(`Robot position: ${robot.position}`);
                 robot.charge--;
+                robot.score++;
             }
             break;
         case "ArrowLeft":
@@ -47,6 +50,7 @@ export function handleMoveRobot(robot: Robot, eventKey: string, grid: {width: nu
                 console.log('Moved left');
                 console.log(`Robot position: ${robot.position}`);
                 robot.charge--;
+                robot.score++;
             }
             break;
         case "ArrowRight":
@@ -56,6 +60,7 @@ export function handleMoveRobot(robot: Robot, eventKey: string, grid: {width: nu
                 console.log('Moved right');
                 console.log(`Robot position: ${robot.position}`);
                 robot.charge--;
+                robot.score++;
             }
             break;
         default:
@@ -64,7 +69,7 @@ export function handleMoveRobot(robot: Robot, eventKey: string, grid: {width: nu
     // event.preventDefault();
 }
 
-export function isValidMove(robot: Robot, move: Move, grid: {width: number, height: number}  ) {
+function isValidMove(robot: Robot, move: Move, grid: {width: number, height: number}  ) {
     switch (move) {
         case "Down":
             return robot.position >= grid.width;
@@ -88,6 +93,7 @@ function chargeRobot(robot: Robot) {
 export function explodeRobot(robot: Robot) {
     if(robot && robot.charge === 0 && robot.position !== 0){
         robot.hasExploded = true;
+        alert('Game Over');
         console.log('ROBOT HAS EXPLODED');
     } else if (robot.position === 0) {
         chargeRobot(robot);
