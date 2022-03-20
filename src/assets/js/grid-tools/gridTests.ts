@@ -4,7 +4,7 @@ let count = 0;
 
 try {
     // checks if array is filled
-    const gridRef = grid.generateGrid(5,5);
+    const gridRef = grid.generateGrid({dimensions: {width: 5,height: 5}});
     console.log(gridRef);
     if(gridRef.length !== 25){
         throw new Error(`Expected 25, got ${gridRef.length}`);

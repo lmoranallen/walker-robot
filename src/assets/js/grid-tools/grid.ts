@@ -11,13 +11,25 @@ type Space = {
     hasRobot: boolean,
 }
 
-
-// Given a set width and height, returns an array of spaces that represents the grid
-export function generateGrid(width: number, height: number) {
-    return new Array(width*height).fill('O');
+export type Grid = {
+    dimensions: {width: number, height: number}    
 }
 
-// confirms whether the robot is on the starting space - necessary for determining
+
+// Given a set width and height, returns an array of spaces that represents the grid
+export function generateGrid(grid:Grid) {
+    return new Array(grid.dimensions.width*grid.dimensions.height).fill('O');
+}
+
+//updates the snapshot of the robot's position on the board
+export function updateGrid(robotPosition: number, grid: any[]) {
+    const lastPosition = grid.indexOf('X'); //gets the last marked position of the robot
+    grid[lastPosition] = 'O';
+    grid[robotPosition] = 'X';
+    console.log(grid);
+}
+
+// confirms whether the robot is on the starting space - necessary for determining explosion
 export function isStartSpace(position: number) {
     return (position === 0);
 }
