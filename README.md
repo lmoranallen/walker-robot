@@ -4,7 +4,11 @@ TypeScript implementation of a robot traversing an N x N grid.
 
 
 ## Setup
-To start: `npx tsc && src/app.js`
+Install modules: `npm i`
+
+To start: 
+> `npx tsc && src/app.js`\
+> Go to `localhost:3000/`
 
 To run gridtests: `npm run grid-test`
 
